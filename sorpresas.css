@@ -1,0 +1,419 @@
+/* Los regalos abiertos llevan su nombre para poder encontrarlos de nuevo. */
+.day-card { height: 100%; }
+.day-card[data-state="opened"] {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: .16rem;
+  padding-top: 2.1rem;
+}
+.day-card[data-state="opened"] .card-number { font-size: clamp(1.8rem, 3.1vw, 2.7rem); }
+.day-card[data-state="opened"] .card-decoration { opacity: .15; }
+.card-memory {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: clamp(.73rem, 1vw, .85rem);
+  font-weight: 600;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+/* Los objetos se presentan como ilustraciones sobre distintas clases de papel. */
+.gift-reveal[data-kind="ilustracion"] {
+  --mat: #f6e4d9;
+  --rule: #d8b9a7;
+  --accent: #814c3a;
+  --pattern: repeating-linear-gradient(0deg, transparent 0 13px, #ad543016 13px 26px),
+             repeating-linear-gradient(90deg, transparent 0 13px, #ad543016 13px 26px);
+}
+
+.gift-reveal[data-theme="mesa"] {
+  --mat: #e7ebdb;
+  --rule: #bdc6a7;
+  --accent: #526142;
+  --pattern: repeating-linear-gradient(90deg, transparent 0 12px, #8f9a7040 12px 14px, transparent 14px 17px, #8f9a7024 17px 18px);
+}
+
+.gift-reveal[data-theme="tocador"] {
+  --mat: #e0e8e7;
+  --rule: #abc5c1;
+  --accent: #3e6663;
+  --pattern: radial-gradient(ellipse at 15% 100%, #c4d8d3, transparent 48%),
+             repeating-radial-gradient(ellipse at 105% -40%, transparent 0 18px, #8fa8a424 19px, transparent 21px);
+}
+
+.gift-reveal[data-theme="cacao"] {
+  --mat: #eededc;
+  --rule: #cba5a1;
+  --accent: #803e46;
+  --pattern: repeating-linear-gradient(115deg, transparent 0 13px, #95505a15 13px 17px);
+}
+
+.gift-reveal[data-theme="flores"] {
+  --mat: #f1e0e4;
+  --rule: #cfa9b0;
+  --accent: #814658;
+  --pattern: radial-gradient(ellipse at 0 90%, #d8e1cc, transparent 50%),
+             repeating-linear-gradient(90deg, transparent 0 5px, #ae697e0d 5px 7px);
+}
+
+.gift-reveal[data-theme="navidad"] {
+  --mat: #e2ebe1;
+  --rule: #aec4b0;
+  --accent: #3a6252;
+  --pattern: repeating-linear-gradient(0deg, transparent 0 22px, #688e7924 22px 25px),
+             repeating-linear-gradient(90deg, transparent 0 22px, #688e7924 22px 25px);
+}
+
+.gift-reveal[data-theme="recuerdo"] {
+  --mat: #dde8f1;
+  --rule: #a8bfd4;
+  --accent: #45637e;
+  --pattern: repeating-linear-gradient(135deg, transparent 0 12px, #6f91ab18 12px 14px);
+}
+
+[data-kind="ilustracion"] .gift-letter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: .55rem .55rem 1.5rem;
+  background: #fffbf4;
+}
+
+[data-kind="ilustracion"] .gift-photo {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  order: -1;
+  place-items: center;
+  inline-size: 100%;
+  block-size: clamp(10rem, 27dvh, 15rem);
+  overflow: hidden;
+  margin: 0 0 1.2rem;
+  padding: .45rem;
+  border: 1px solid var(--rule);
+  border-radius: .63rem .63rem .15rem .15rem;
+  background: var(--pattern), var(--mat);
+  box-shadow: none;
+}
+
+[data-kind="ilustracion"] .gift-photo::before {
+  position: absolute;
+  inset: 8px;
+  border: 1px solid #fff9;
+  content: "";
+}
+
+[data-kind="ilustracion"] .gift-photo::after {
+  position: absolute;
+  inline-size: min(77%, 19rem);
+  block-size: 122%;
+  transform: rotate(-6deg);
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  background: #fffaf0;
+  box-shadow: 0 0 0 4px #fff8, 0 0 0 5px var(--rule);
+  content: "";
+}
+
+[data-theme="tocador"] .gift-photo::after,
+[data-theme="recuerdo"] .gift-photo::after {
+  block-size: 130%;
+  border-radius: 48% 48% 1% 1%;
+  transform: translateY(11%);
+}
+
+[data-kind="ilustracion"] .gift-photo img {
+  position: relative;
+  z-index: 1;
+  inline-size: 100%;
+  block-size: 100%;
+  min-block-size: 0;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  animation: keepsake-arrive .65s var(--ease-out) both;
+}
+
+[data-kind="ilustracion"] .gift-letter h2 {
+  max-inline-size: 18ch;
+  padding-inline: .45rem;
+  color: var(--accent);
+  font-size: clamp(1.85rem, 5vw, 2.65rem);
+}
+
+[data-kind="ilustracion"] .gift-message {
+  max-inline-size: 37ch;
+  margin: .7rem 1rem 0;
+  text-wrap: pretty;
+}
+
+[data-kind="ilustracion"] .letter-signature { margin-block-start: .85rem; }
+
+/* El talón, los colores y el PNG de cada vale comparten la misma paleta. */
+.ticket[data-tone="rebel"] {
+  --ticket-paper: #f5dfcc;
+  --ticket-edge: #dcbba4;
+  --ticket-accent: #864728;
+  --ticket-glow: #fff7ed;
+  --stub-paper: #f5ebd8;
+}
+
+.ticket[data-tone="coca"] {
+  --ticket-paper: #f6e4df;
+  --ticket-edge: #dfc0b9;
+  --ticket-accent: #8e3c3c;
+  --ticket-glow: #fffaf4;
+  --stub-paper: #e6eef6;
+}
+
+.ticket[data-tone="fresa"] {
+  --ticket-paper: #f4dcdf;
+  --ticket-edge: #dbb5bc;
+  --ticket-accent: #863d53;
+  --ticket-glow: #fff8f4;
+  --stub-paper: #e8eedc;
+}
+
+.ticket[data-tone="batido"] {
+  --ticket-paper: #e1ecd9;
+  --ticket-edge: #bccdb2;
+  --ticket-accent: #416242;
+  --ticket-glow: #fafbed;
+  --stub-paper: #f0e7d4;
+}
+
+[data-kind="vale"] .gift-letter { padding: .8rem; }
+[data-kind="vale"] .ticket {
+  max-inline-size: none;
+  margin: 0;
+  transform-origin: 50% 5%;
+  animation: slip-in .55s var(--ease-out) both;
+}
+
+[data-kind="vale"] .ticket-art img {
+  inset: -2%;
+  inline-size: 104%;
+  block-size: 104%;
+  mix-blend-mode: multiply;
+  filter: none;
+  border-radius: 19%;
+}
+
+[data-kind="vale"] .ticket-subtitle { margin: 0 0 .8rem; color: var(--ticket-accent); }
+[data-kind="vale"] .ticket-action-row { padding-block-end: .35rem; }
+
+/* Un calendario de escritorio que se puede hojear. */
+[data-kind="calendario"] .gift-letter {
+  background: radial-gradient(ellipse at 10% 0%, #eee0cc, transparent 52%), #f8efe4;
+}
+
+[data-kind="calendario"] .gift-message { max-inline-size: 35ch; }
+
+.keepsake-calendar {
+  position: relative;
+  max-inline-size: 23rem;
+  margin: 1.65rem auto .6rem;
+  padding: 1.05rem clamp(.6rem, 3vw, 1.25rem) .85rem;
+  border: 1px solid #cebda7;
+  border-top: .55rem solid #6e858f;
+  border-radius: .3rem;
+  background: #fffdf7;
+  box-shadow: 0 3px #efe6d7, 0 4px #ccbaa3, 0 7px #f8f0e3, 0 8px #cbbca9, 0 .7rem 1.1rem #67574421;
+}
+
+.keepsake-calendar::before {
+  position: absolute;
+  inset: -1.02rem 15% auto;
+  height: 1.15rem;
+  background: repeating-linear-gradient(90deg, #9da6a5, #505f63 2px, #b9c2bd 4px, transparent 5px 12.5%);
+  content: "";
+}
+
+.keepsake-heading { display: flex; align-items: center; justify-content: space-between; }
+.keepsake-heading h3 {
+  margin: 0;
+  color: #384f5b;
+  font: italic 500 clamp(1.55rem, 4vw, 2rem)/1.15 var(--serif);
+  text-transform: capitalize;
+}
+
+.keepsake-heading button {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid #dcd1be;
+  border-radius: 50%;
+  background: #faf5ea;
+  color: #405866;
+  font: 1.65rem/1 var(--serif);
+  cursor: pointer;
+}
+
+.keepsake-heading button:disabled { opacity: .32; cursor: default; }
+.keepsake-heading button:enabled:hover { background: #eee5d4; }
+.keepsake-calendar table { width: 100%; table-layout: fixed; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.keepsake-calendar th { height: 2.25rem; color: #6f665a; font-size: .74rem; }
+.keepsake-calendar td { height: 1.7rem; padding: 0; color: #354851; font-size: .89rem; }
+.anniversary-day {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1.68rem;
+  block-size: 1.68rem;
+  border: 1px solid #b26775;
+  border-radius: 47% 53% 49% 45%;
+  background: #fae5e8;
+  color: #83344c;
+  font-weight: 700;
+}
+.anniversary-day::after { position: absolute; inset: -.35rem -.18rem auto auto; color: #a2455d; content: "♥"; font-size: .67rem; }
+
+/* Las dos escenas se leen de la mañana a la noche. */
+[data-kind="itinerario"] .gift-letter {
+  padding-inline: clamp(.9rem, 3vw, 1.5rem);
+  background: linear-gradient(155deg, #fcf5e8, #f2e6d5);
+}
+[data-kind="itinerario"] .gift-message { max-inline-size: 32ch; }
+.date-plans { display: grid; gap: .6rem; margin: 1.2rem 0 0; padding: 0; list-style: none; text-align: left; }
+.date-plans li {
+  position: relative;
+  display: grid;
+  align-content: end;
+  isolation: isolate;
+  overflow: hidden;
+  min-block-size: 8.3rem;
+  padding: 1.1rem 1.3rem;
+  border-radius: .45rem;
+  background: linear-gradient(85deg, #201c1af5 2%, #251b18ce 42%, #201c1a38), url("assets/regalos/cine.webp") center 54% / cover;
+  color: #fff8e9;
+  animation: keepsake-arrive .5s var(--ease-out) both;
+}
+.date-plans li:nth-child(2) {
+  background: linear-gradient(85deg, #191c32f5 2%, #201a37d6 42%, #17172942), url("assets/regalos/concierto.webp") center 61% / cover;
+  animation-delay: .12s;
+}
+.date-plans li::before {
+  position: absolute;
+  inset: .22rem .5rem auto;
+  height: .22rem;
+  background: repeating-linear-gradient(90deg, #fff9 0 .42rem, transparent .42rem .86rem);
+  content: "";
+  opacity: .35;
+}
+.date-plans li > span { color: #ffe7b9; font-size: .75rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.date-plans li:nth-child(2) > span { color: #e3dcff; }
+.date-plans h3 { margin: .2rem 0; font: 500 clamp(1.45rem, 4vw, 1.9rem)/1.15 var(--serif); text-wrap: balance; }
+.date-plans p { margin: 0; font-size: .87rem; }
+
+/* Portada de disco y fotograma del cierre de año. */
+.gift-reveal:is([data-kind="video"], [data-kind="cancion"]) .gift-letter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+[data-kind="cancion"] .gift-letter { background: radial-gradient(ellipse at 50% 0%, #edddeb, #fff8f1 85%); }
+.media-cover { position: relative; isolation: isolate; order: -1; }
+[data-kind="cancion"] .media-cover { width: min(18rem, 90%); aspect-ratio: 1.62; margin: .2rem 0 1.2rem; }
+[data-kind="cancion"] .media-cover::before {
+  position: absolute;
+  z-index: 1;
+  inset: 2% auto 2% 0;
+  aspect-ratio: 1;
+  transform: rotate(-4deg);
+  border: 1px solid #fff8;
+  border-radius: 2px;
+  background: url("assets/regalos/portada.webp") center / cover;
+  box-shadow: .18rem .34rem .55rem #382b4040, inset 4px 0 4px #fff3;
+  content: "";
+}
+[data-kind="cancion"] .media-cover::after {
+  position: absolute;
+  inset: 4% 0 4% auto;
+  aspect-ratio: 1;
+  border: 1px solid #262634;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffe8c8 0 1.6%, #b96578 1.8% 17%, #dd90a0 17.5% 18%, transparent 18.6%),
+    repeating-radial-gradient(circle, transparent 0 2px, #c1c0d733 2.4px, transparent 3.3px),
+    conic-gradient(#151829, #474258, #1f2231, #4c4859, #171829);
+  box-shadow: 0 .3rem .5rem #392a3e30;
+  content: "";
+  animation: record-slip .8s var(--ease-out) both;
+}
+[data-kind="video"] .gift-letter { background: linear-gradient(155deg, #273247, #141e31 84%); }
+[data-kind="video"] .gift-letter::before { border-color: #b5c1d53b; }
+[data-kind="video"] .gift-letter h2 { color: #fff3d8; }
+[data-kind="video"] .gift-message { color: #e0e5ed; }
+[data-kind="video"] .media-cover {
+  inline-size: 100%;
+  aspect-ratio: 2.15;
+  margin-bottom: 1rem;
+  border-block: .6rem solid #101824;
+  border-radius: .15rem;
+  background: url("assets/regalos/fin-de-ano.webp") center 59% / cover;
+  box-shadow: 0 .4rem 1.2rem #060b1745;
+  animation: frame-in .75s ease-out both;
+}
+#gift-player:empty { display: none; }
+#gift-player:not(:empty) { width: 100%; margin-top: 1rem; }
+#gift-player :is(audio, video) { display: block; width: 100%; border-radius: .55rem; }
+#gift-player video { max-height: 52dvh; background: #101824; }
+
+/* Lona de tela con cuatro ojillos, suspendida entre dos cuerdas. */
+[data-kind="lona"] .gift-letter {
+  display: grid;
+  place-items: center;
+  min-block-size: clamp(14rem, 42dvh, 20rem);
+  overflow: hidden;
+  padding: 2.4rem clamp(.75rem, 4vw, 2.1rem);
+  background: radial-gradient(ellipse at 50% 12%, #577078, #283e49 82%);
+}
+[data-kind="lona"] .gift-letter::before {
+  inset: 0;
+  border: 0;
+  background: linear-gradient(13deg, transparent 47%, #d8c5a1 48% 49%, transparent 50%) left center / 23% 70% no-repeat,
+              linear-gradient(-15deg, transparent 47%, #d8c5a1 48% 49%, transparent 50%) right center / 23% 70% no-repeat;
+}
+[data-kind="lona"] .gift-letter h2 {
+  --eyelet: radial-gradient(circle, #374952 0 2px, #a4a49a 2.5px, #faf8e4 4px, #827d6a 4.8px, transparent 5.5px);
+  position: relative;
+  width: 100%;
+  padding: clamp(2rem, 5vw, 2.6rem) .65rem;
+  transform: rotate(-2.5deg);
+  transform-origin: 50% 0;
+  border: 1px solid #cabea5;
+  background: var(--eyelet) left 7px top 7px / 13px 13px no-repeat,
+    var(--eyelet) right 7px top 7px / 13px 13px no-repeat,
+    var(--eyelet) left 7px bottom 7px / 13px 13px no-repeat,
+    var(--eyelet) right 7px bottom 7px / 13px 13px no-repeat,
+    repeating-linear-gradient(0deg, transparent 0 2px, #7e694110 2px 3px),
+    linear-gradient(99deg, #e4cfaa, #fff2d7 19%, #efdfbc 47%, #fff5dc 69%, #e7d4b2);
+  box-shadow: .2rem .65rem .95rem #17263170;
+  color: #873829;
+  font: 700 clamp(1.45rem, 6.8vw, 2.7rem)/1.04 var(--sans);
+  letter-spacing: -.035em;
+  text-wrap: balance;
+  animation: unfurl .74s var(--ease-out) both;
+}
+[data-kind="lona"] .gift-letter h2::before { position: absolute; inset: 5px; border: 1px dashed #9a805e9c; content: ""; }
+
+@keyframes keepsake-arrive {
+  from { opacity: 0; transform: translateY(.65rem) scale(.96); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes slip-in {
+  from { opacity: 0; transform: translateY(-.8rem) rotate(-2deg); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes record-slip { from { transform: translateX(-38%) rotate(-25deg); } to { transform: none; } }
+@keyframes frame-in { from { filter: brightness(.45); } to { filter: brightness(1); } }
+@keyframes unfurl {
+  from { opacity: 0; transform: perspective(32rem) translateY(-.5rem) rotateX(-65deg) rotate(-2.5deg); }
+  70% { transform: perspective(32rem) rotateX(5deg) rotate(-2deg); }
+  to { opacity: 1; transform: rotate(-2.5deg); }
+}

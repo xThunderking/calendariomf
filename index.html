@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e6eff7">
+  <meta name="description" content="Un pequeño regalo cada día del 1 al 25 de diciembre.">
+  <title>mafercember</title>
+  <link rel="icon" type="image/svg+xml" href="assets/mafercember-pestana.svg">
+  <link rel="stylesheet" href="styles.css?v=navidad25">
+  <link rel="stylesheet" href="sorpresas.css?v=coca9">
+  <script src="regalos.js?v=facial6b" defer></script>
+  <script src="ticket-image.js?v=herbalife13" defer></script>
+  <script src="app.js?v=compartir25" defer></script>
+</head>
+<body>
+  <main id="calendario" class="calendar" aria-labelledby="calendar-title">
+    <header class="calendar-header">
+      <img class="calendar-art" src="assets/diciembre-azul.webp" alt="" fetchpriority="high">
+      <div class="calendar-heading">
+        <p class="calendar-eyebrow"><span aria-hidden="true">✦</span> Calendario de Adviento</p>
+        <div class="calendar-brand">
+          <img class="calendar-logo" src="assets/mafercember-25.svg?v=2" alt="">
+          <h1 id="calendar-title">mafercember</h1>
+        </div>
+      </div>
+    </header>
+
+    <section class="calendar-board" aria-labelledby="month-title">
+      <div class="board-heading">
+        <div class="month">
+          <h2 id="month-title">Diciembre <span id="calendar-year"></span></h2>
+          <p id="calendar-status"></p>
+        </div>
+        <div class="progress-card">
+          <span class="progress-heart" aria-hidden="true">♡</span>
+          <div>
+            <p><strong id="opened-count">0</strong> de <span id="gift-count">25</span> abiertos</p>
+            <progress id="progress-bar" aria-label="Regalos abiertos" max="25" value="0"></progress>
+          </div>
+        </div>
+      </div>
+      <ol id="calendar-grid" class="calendar-grid" role="list"></ol>
+      <noscript><p>Activa JavaScript para ver los regalos del calendario.</p></noscript>
+      <ul class="calendar-legend" aria-label="Estados de los regalos" role="list">
+        <li><span class="state-icon icon-lock" aria-hidden="true"></span> Por llegar</li>
+        <li><span class="state-icon icon-gift" aria-hidden="true"></span> Disponible</li>
+        <li><span class="state-icon icon-heart" aria-hidden="true"></span> Abierto</li>
+      </ul>
+    </section>
+  </main>
+
+  <dialog id="gift-dialog" class="gift-dialog" aria-labelledby="gift-stage-title">
+    <div class="dialog-surface">
+      <div class="dialog-topline">
+        <p class="gift-date"><span aria-hidden="true">✦</span> <time id="gift-day"></time></p>
+        <button class="close-dialog" type="button" aria-label="Cerrar regalo">
+          <span class="icon-close" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <section id="gift-locked" class="gift-stage gift-locked" hidden>
+        <h2 id="gift-locked-title" tabindex="-1">Un regalo <em>para ti.</em></h2>
+        <div class="lock-scene" aria-hidden="true">
+          <span class="lock-star lock-star-one">✧</span>
+          <span class="lock-star lock-star-two">✦</span>
+          <img src="assets/regalo-azul.webp" alt="">
+          <span class="lock-seal"><span class="state-icon icon-lock"></span></span>
+        </div>
+        <div class="gift-countdown" role="timer" aria-label="Tiempo restante para abrir el regalo">
+          <div><span class="countdown-number">00</span><span class="countdown-unit">Días</span></div>
+          <div><span class="countdown-number">00</span><span class="countdown-unit">Horas</span></div>
+          <div><span class="countdown-number">00</span><span class="countdown-unit">Minutos</span></div>
+          <div><span class="countdown-number">00</span><span class="countdown-unit">Segundos</span></div>
+        </div>
+      </section>
+
+      <section id="gift-stage" class="gift-stage">
+        <h2 id="gift-stage-title"><span id="gift-stage-label">Un regalo</span> <em>para ti.</em></h2>
+        <button id="unwrap-button" class="unwrap-button" type="button" autofocus>
+          <span id="present-scene" class="present-scene" aria-hidden="true">
+            <span class="present-orbit"></span>
+            <span class="scene-star star-one">✧</span>
+            <span class="scene-star star-two">✦</span>
+            <span class="scene-star star-three">✧</span>
+            <span class="scene-star star-four">·</span>
+            <span class="present-shadow"></span>
+            <span class="present-figure">
+              <span class="present-light"></span>
+              <span class="present-envelope"><span>♡</span></span>
+              <img class="present-piece present-box" src="assets/regalo-azul.webp" alt="">
+              <img class="present-piece present-lid" src="assets/regalo-azul.webp" alt="">
+            </span>
+            <span id="opening-sparks" class="opening-sparks"></span>
+          </span>
+          <span id="mail-scene" class="mail-scene" aria-hidden="true" hidden>
+            <span class="mail-halo"></span>
+            <span class="mail-spark">✧</span>
+            <span class="mail-spark">✦</span>
+            <span class="mail-spark">✧</span>
+            <span class="mail-spark">♡</span>
+            <span class="mail-envelope">
+              <span class="mail-back"></span>
+              <span class="mail-paper"><span>♡</span></span>
+              <span class="mail-pocket"></span>
+              <span class="mail-flap"></span>
+              <span class="mail-seal">
+                <span class="seal-piece seal-left">♡</span>
+                <span class="seal-piece seal-right">♡</span>
+              </span>
+            </span>
+          </span>
+          <span class="pill-button unwrap-cta">
+            <span id="unwrap-icon" class="state-icon icon-gift" aria-hidden="true"></span>
+            <span id="unwrap-label">Abrir mi regalo</span>
+          </span>
+        </button>
+      </section>
+
+      <article id="gift-reveal" class="gift-reveal" hidden>
+        <div class="gift-letter">
+          <div id="gift-ornament" class="letter-ornament" aria-hidden="true"><span>✧</span><span class="letter-seal">♡</span><span>✧</span></div>
+          <div id="letter-decoration" class="letter-decoration" aria-hidden="true" hidden>
+            <span class="letter-postmark">♡</span>
+            <img src="assets/carta-flores.webp" alt="" loading="lazy" decoding="async">
+          </div>
+          <h2 id="gift-title" tabindex="-1"></h2>
+          <p id="gift-message" class="gift-message"></p>
+          <section id="keepsake-calendar" class="keepsake-calendar" aria-labelledby="keepsake-month" hidden>
+            <div class="keepsake-heading">
+              <button id="month-prev" type="button" aria-label="Mes anterior">‹</button>
+              <h3 id="keepsake-month" aria-live="polite" aria-atomic="true"></h3>
+              <button id="month-next" type="button" aria-label="Mes siguiente">›</button>
+            </div>
+            <table aria-labelledby="gift-title keepsake-month">
+              <thead><tr>
+                <th scope="col">Lun</th><th scope="col">Mar</th><th scope="col">Mié</th><th scope="col">Jue</th>
+                <th scope="col">Vie</th><th scope="col">Sáb</th><th scope="col">Dom</th>
+              </tr></thead>
+              <tbody id="keepsake-dates"></tbody>
+            </table>
+          </section>
+          <ol id="date-plans" class="date-plans" aria-label="Nuestras citas del día" hidden></ol>
+          <div id="media-cover" class="media-cover" aria-hidden="true" hidden></div>
+          <div id="gift-player"></div>
+          <div id="carlota-surprise" class="carlota-surprise" hidden>
+            <div class="carlota-card">
+              <p class="carlota-eyebrow">✦ &nbsp; Preparada con amor &nbsp; ✦</p>
+              <div class="carlota-art">
+                <span class="carlota-spark carlota-spark-one" aria-hidden="true">✧</span>
+                <span class="carlota-spark carlota-spark-two" aria-hidden="true">✦</span>
+                <span class="carlota-spark carlota-spark-three" aria-hidden="true">♡</span>
+                <img src="assets/carlota-limon.png" alt="Ilustración de una rebanada de carlota de limón" loading="lazy" decoding="async">
+              </div>
+              <p class="carlota-note">Hecha por mí, para compartir contigo <span aria-hidden="true">♡</span></p>
+            </div>
+          </div>
+          <div id="bow-surprise" class="bow-surprise" hidden>
+            <div class="bow-card">
+              <p class="bow-eyebrow">✦ &nbsp; Un detalle para ti &nbsp; ✦</p>
+              <div class="bow-art">
+                <span class="bow-spark bow-spark-one" aria-hidden="true">✧</span>
+                <span class="bow-spark bow-spark-two" aria-hidden="true">✦</span>
+                <span class="bow-spark bow-spark-three" aria-hidden="true">♡</span>
+                <img src="assets/mono-cabello.png" alt="Ilustración de un moño para el cabello" loading="lazy" decoding="async">
+              </div>
+            </div>
+          </div>
+          <div id="secret-surprise" class="secret-surprise" hidden>
+            <div class="secret-card">
+              <p class="secret-eyebrow">✦ &nbsp; Una sorpresa especial &nbsp; ✦</p>
+              <div class="secret-art" aria-hidden="true">
+                <span class="secret-star secret-star-one">✧</span>
+                <span class="secret-star secret-star-two">✦</span>
+                <span class="secret-star secret-star-three">♡</span>
+                <img src="assets/regalo-azul.webp" alt="">
+                <span class="secret-question">?</span>
+              </div>
+              <p class="secret-caption">Su contenido es un secreto</p>
+              <p id="secret-note" class="secret-note">Hecho para hacerte sonreír <span aria-hidden="true">♡</span></p>
+            </div>
+          </div>
+
+          <article id="gift-ticket" class="ticket" hidden aria-labelledby="ticket-event">
+            <div class="ticket-main">
+              <div class="ticket-top">
+                <span id="ticket-category"></span>
+                <span class="ticket-for-two"><span aria-hidden="true">✦</span> <span id="ticket-promise-badge"></span></span>
+              </div>
+              <div class="ticket-spotlight">
+                <div class="ticket-story">
+                  <h3 id="ticket-event"></h3>
+                  <p id="ticket-subtitle" class="ticket-subtitle"></p>
+                </div>
+                <figure id="ticket-art" class="ticket-art" hidden aria-hidden="true">
+                  <span aria-hidden="true">✦</span>
+                  <img id="ticket-illustration" alt="">
+                </figure>
+              </div>
+              <dl class="ticket-details">
+                <div><dt>Fecha</dt><dd id="ticket-date"></dd></div>
+                <div><dt>Hora</dt><dd id="ticket-time"></dd></div>
+                <div><dt>Lugar</dt><dd id="ticket-place"></dd></div>
+              </dl>
+            </div>
+            <div class="ticket-stub">
+              <div><span>Invitación</span><strong id="ticket-code"></strong></div>
+              <span class="ticket-barcode" aria-hidden="true"></span>
+              <span class="ticket-heart" aria-hidden="true">♡</span>
+            </div>
+          </article>
+
+          <div id="ticket-actions" class="ticket-actions" hidden>
+            <div class="ticket-action-row">
+              <a id="ticket-download" download hidden></a>
+              <button id="ticket-share" class="pill-button ticket-share" type="button">
+                <span class="state-icon icon-share" aria-hidden="true"></span> Compartir
+              </button>
+            </div>
+            <p id="ticket-action-status" class="ticket-action-status" role="status"></p>
+          </div>
+
+          <figure id="gift-photo" class="gift-photo" hidden><img id="gift-image" alt=""></figure>
+          <a id="gift-link" class="pill-button gift-link" target="_blank" rel="noopener noreferrer" hidden>
+            <span id="gift-link-label"></span><span aria-hidden="true">✦</span>
+          </a>
+          <p id="gift-signature" class="letter-signature">mafercember 2026</p>
+        </div>
+      </article>
+    </div>
+  </dialog>
+</body>
+</html>
+
