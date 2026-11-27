@@ -22,7 +22,23 @@ const CALENDARIO = {
     {
       tipo: 'carta',
       apertura: 'regalo',
-      mensaje: 'Hola'
+      tema: 'clasica',
+      titulo: 'Carta para mi amor',
+      mensaje: `Hola, mi amor:
+
+Espero que te la hayas pasado increíble en tu cumpleaños. Perdón por no darte tantos regalos ni tantos detalles como tú me diste a mí. Quiero que sepas que todo lo hice de corazón, aunque algunas cosas te las dí medio rapido, jajaja.
+
+Quiero que sepas que me enorgullece mucho lo fuerte que eres y cómo todos los días tratas de estar con la mayor energía posible, a pesar de todo lo que llevas encima. Sé que son tiempos complicados, como todo en la vida. Hay subidas y bajadas, pero siempre, siempre se vuelve a subir. Quiero que sepas que siempre estaré aquí para subir a tu lado y apoyarte en todo lo que esté a mi alcance, para que seas siempre la más feliz.
+
+No todo es perfecto y también tenemos bajas, como en todo, pero yo te amo en todo momento y, cuando hay dificultades, te amo más.
+
+Espero que te guste mucho este último regalo que preparé para ti y que todo salga como lo tengo planeado, porque planear regalos durante un mes está medio complicado, jajaja.
+
+Quiero que sepas que te amo y que soy el más feliz a tu lado.
+
+¡Feliz cumpleaños, mi vida! Que celebremos este y muchos más juntos.
+
+Con todo mi amor,`
     },
     {
       tipo: 'secreto',

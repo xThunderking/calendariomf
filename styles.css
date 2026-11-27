@@ -1459,6 +1459,37 @@ button:focus-visible, a:focus-visible {
   text-align: start;
 }
 
+.gift-reveal[data-kind="letter"][data-theme="clasica"] .gift-letter {
+  border-color: #dfcfb5;
+  border-radius: .35rem;
+  background:
+    linear-gradient(90deg, transparent 0 1.05rem, #b96d6330 1.05rem 1.1rem, transparent 1.1rem),
+    radial-gradient(ellipse at 78% 8%, #f6e8d4 0, transparent 42%),
+    linear-gradient(135deg, #fffdf7, #f8f0e2);
+  box-shadow: 0 .5rem 1.5rem #65553c20, inset 0 0 2.5rem #d7c4a51c;
+}
+
+.gift-reveal[data-kind="letter"][data-theme="clasica"] .gift-letter::after {
+  position: absolute;
+  inset: 1.15rem 1.5rem auto;
+  color: #9b7955;
+  content: "PARA MI AMOR  ·  CON TODO MI CARIÑO";
+  font: 700 .62rem/1.2 var(--sans);
+  letter-spacing: .16em;
+  text-align: start;
+}
+
+.gift-reveal[data-kind="letter"][data-theme="clasica"] .gift-message {
+  max-inline-size: 48ch;
+  font-size: clamp(1rem, 2.3vw, 1.12rem);
+  line-height: 1.82;
+}
+
+.gift-reveal[data-kind="letter"][data-theme="clasica"] .gift-message::first-letter {
+  color: #9b7955;
+  font-size: 1.35em;
+}
+
 .gift-reveal.short-letter .gift-letter {
   align-content: center;
   padding-block: 2.5rem;
